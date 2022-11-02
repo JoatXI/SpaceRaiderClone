@@ -10,19 +10,19 @@ pygame.init()
 screen = pygame.display.set_mode((800, 600))
 
 # To set the game background
-background = pygame.image.load("skyground.jpg")
+background = pygame.image.load("images\skyground.jpg")
 
 # Adding background music
-mixer.music.load('spacewar.mp3')
+mixer.music.load('sounds\spacewar.mp3')
 mixer.music.play(-1)
 
 # To set the game icon and name
 pygame.display.set_caption("Space Raiders 9999")
-game_icon = pygame.image.load("gali.png")
+game_icon = pygame.image.load("images\gali.png")
 pygame.display.set_icon(game_icon)
 
 # To add player/character
-player_img = pygame.image.load("player.png")
+player_img = pygame.image.load("images\player.png")
 player_x = 370
 player_y = 530
 player_x_change = 0
@@ -36,14 +36,14 @@ enemy_y_change = []
 num_of_enemies = 6
 
 for i in range(num_of_enemies):
-    enemy_img.append(pygame.image.load("enemy.png"))
+    enemy_img.append(pygame.image.load("images\enemy.png"))
     enemy_x.append(random.randint(0, 735))
     enemy_y.append(random.randint(7, 150))
     enemy_x_change.append(2)
     enemy_y_change.append(30)
 
 # Adding bullets
-bullet_img = pygame.image.load("bullet.png")
+bullet_img = pygame.image.load("images\sbullet.png")
 bullet_x = 0
 bullet_y = 530
 bullet_x_change = 0
@@ -112,7 +112,7 @@ while running:
                 player_x_change = 13
         if event.type == pygame.MOUSEBUTTONDOWN:
             if bullet_state == "ready":
-                bullet_sound = mixer.Sound('shots.wav')
+                bullet_sound = mixer.Sound('sounds\shots.wav')
                 bullet_sound.play()
                 bullet_x = player_x
             fire_bullet(bullet_x, bullet_y)
@@ -138,7 +138,7 @@ while running:
                 enemy_y[j] = 1100
                 player_x = 2090
                 player_y = 2090
-                mixer.music.load('spacewar.mp3')
+                mixer.music.load('sounds\spacewar.mp3')
                 mixer.music.stop()
                 bullet_sound = mixer.pause()
             end_text()
@@ -171,7 +171,7 @@ while running:
         # Checking collision to kill enemy
         collide = collision(enemy_x[i], enemy_y[i], bullet_x, bullet_y)
         if collide:
-            contact_sound = mixer.Sound('kills.wav')
+            contact_sound = mixer.Sound('sounds\kills.wav')
             contact_sound.play()
             bullet_y = 530
             bullet_state = "ready"
