@@ -40,7 +40,7 @@ for i in range(num_of_enemies):
     enemy_x.append(random.randint(0, 735))
     enemy_y.append(random.randint(7, 150))
     enemy_x_change.append(2)
-    enemy_y_change.append(30)
+    enemy_y_change.append(3)
 
 # Adding bullets
 bullet_img = pygame.image.load("images\sbullet.png")
@@ -105,11 +105,11 @@ while running:
 
         # To gain control of player/character
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                player_x_change = -13
+            if event.key == (pygame.K_LEFT or pygame.K_a):
+                player_x_change = -1
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT:
-                player_x_change = 13
+            if event.key == (pygame.K_RIGHT or pygame.K_d):
+                player_x_change = 1
         if event.type == pygame.MOUSEBUTTONDOWN:
             if bullet_state == "ready":
                 bullet_sound = mixer.Sound('sounds\shots.wav')
@@ -147,25 +147,25 @@ while running:
             text_y = 200
             break
 
-
         enemy_x[i] += enemy_x_change[i]
+        
         if enemy_x[i] <= 0:
-            enemy_x_change[i] = 2.5
+            enemy_x_change[i] = 0.3
             enemy_y[i] += enemy_y_change[i]
             if score_value >= 100:
-                enemy_x_change[i] = 3
+                enemy_x_change[i] = 0.4
                 enemy_y[i] += enemy_y_change[i]
                 if score_value >= 300:
-                    enemy_x_change[i] = 4
+                    enemy_x_change[i] = 0.5
                     enemy_y[i] += enemy_y_change[i]
         elif enemy_x[i] >= 736:
-            enemy_x_change[i] = -2.5
+            enemy_x_change[i] = -0.3
             enemy_y[i] += enemy_y_change[i]
             if score_value >= 100:
-                enemy_x_change[i] = -3
+                enemy_x_change[i] = -0.4
                 enemy_y[i] += enemy_y_change[i]
                 if score_value >= 300:
-                    enemy_x_change[i] = -4
+                    enemy_x_change[i] = -0.5
                     enemy_y[i] += enemy_y_change[i]
 
         # Checking collision to kill enemy
